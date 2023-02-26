@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="{{ url_for('static', filename='jquery.js') }}"></script>
+    <script>
+    $SCRIPT_ROOT = {{ request.script_root|tojson }};
+    </script>
+</head>
+<body>
+
+<script>
+  $(function() {
+    $('a#calculate').bind('click', function() {
+      $.getJSON($SCRIPT_ROOT + '/_add_numbers', {
+        s_title: $('input[name="s_title"]').val()
+      }, function(data) {
+        $("#searching_title_msg").text(data.searching_title_msg);
+        $("#author1").text(data.author1);
+        $("#author2").text(data.author2);
+        $("#author3").text(data.author3);
+        $("#author4").text(data.author4);
+        $("#author5").text(data.author5);
+        $("#book1").text(data.book1);
+        $("#book2").text(data.book2);
+        $("#book3").text(data.book3);
+        $("#book4").text(data.book4);
+        $("#book5").text(data.book5);
+      });
+      return false;
+    });
+  });
+</script>
+
+<div class="jumbotron">
+    <h1 class="display-4">Book recommendation app!</h1>
+      <hr class="my-4">
+
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <a class="btn btn-outline-secondary" id=calculate role="button">Submit</a>
+  </div>
+  <input type="text" class="form-control" name=s_title placeholder="The lord of the rings" aria-label="" aria-describedby="basic-addon1">
+</div>
+
+
+
+<p class="lead"><span id=searching_title_msg></span></p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Book</th>
+        <th scope="col">Author</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+        <td><span id=book1>?</span></td>
+      <td><span id=author1>?</span></td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+             <td><span id=book2>?</span></td>
+      <td><span id=author2>?</span></td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+        <td><span id=book3>?</span></td>
+      <td><span id=author3>?</span></td>
+    </tr>
+    <tr>
+      <th scope="row">4</th>
+        <td><span id=book4>?</span></td>
+      <td><span id=author4>?</span></td>
+    </tr>
+      <tr>
+      <th scope="row">5</th>
+        <td><span id=book5>?</span></td>
+      <td><span id=author5>?</span></td>
+    </tr>
+  </tbody>
+</table>
+
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script></body>
+</html>

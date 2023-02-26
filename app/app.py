@@ -38,21 +38,6 @@ def get_title_info(desired_title, books):
     return author, title, author_title
 
 
-def suggestions_to_dict(suggestions, columns, books, s_author="", n_required=5):
-    res_dict = {}
-    suggestions = columns.values[suggestions]
-    for sug in suggestions:
-        row = books.loc[books["authortitle"] == sug, :]
-        author = list(row["author"])[0]
-        if (s_author!="") & (author==s_author):
-            continue
-        title = list(row["title"])[0]
-        res_dict[sug] = [author, title]
-        if len(res_dict.keys()) == n_required:
-            return res_dict
-
-
-
 @app.route('/_add_numbers')
 def add_numbers():
     books, res_dict = load_data()

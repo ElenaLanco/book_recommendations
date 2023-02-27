@@ -43,7 +43,9 @@ def get_title_info(desired_title, books):
 def add_numbers():
     books, res_dict = load_data()
 
-    s_title = request.args.get("s_title", "The Lord of the Rings", type=str)
+    s_title = request.args.get("s_title", default="The Lord of the Rings", type=str)
+    if s_title == "":
+        s_title = "The Lord of the Rings"
     s_author, s_title, s_authortitle = get_title_info(s_title, books)
     searching_title_msg = f"Recommendations for {s_title} from {s_author}:"
     sug_items = res_dict[s_authortitle]

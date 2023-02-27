@@ -9,6 +9,7 @@ app = Flask(__name__)
 
 def load_data():
     books = pd.read_csv(os.path.join(app.root_path, "data", "books_cleaned_limited.csv"))
+    books = books.loc[books["is_analysed"] == 1, :]
     with open(os.path.join(app.root_path, "data", "res_dict.pickle"), "rb") as output_file:
         res_dict = pickle.load(output_file)
     return books, res_dict
